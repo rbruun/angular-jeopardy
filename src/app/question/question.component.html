@@ -1,8 +1,10 @@
 <h3>
-    Here is your question worth <span id="points"> 0 </span> points:
+    Here is your question worth {{question?.value}} points:
   </h3>
 
-<div id="question"></div>
+<div>{{question?.question}}</div>
   <br>
-  <input id="response">
-  <button id="button" name="button">Submit</button>
+  <input [(ngModel)]='userAnswer'>
+  <button (click)='checkAnswer()'>Submit</button>
+
+<app-score [score]='rollingScore'></app-score>

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-question',
@@ -7,7 +8,21 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class QuestionComponent implements OnInit {
 
-  constructor() { }
+  userAnswer: string;
+  rollingScore = 0;
+
+  constructor(private appComponent: AppComponent) { }
+
+  @Input() question;
+
+  checkAnswer() {
+    if (this.userAnswer === this.question.answer) {
+      this.rollingScore += parseInt(this.question.value);
+    } 
+    this.appComponent.getQuestion();
+    this.userAnswer = "";
+    
+  }
 
   ngOnInit() {
   }

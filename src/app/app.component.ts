@@ -17,7 +17,7 @@ export class AppComponent {
     getQuestion(){
     this.jeopardyService.getRandomQuestion()
       .subscribe(
-        question => {this.question = question; console.log(this.question);},
+        question => {this.question = question[0]; console.log(this.question);},
         error =>  {});
   }
 
