@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AppComponent } from '../app.component';
+import { JeopardyService } from '../jeopardy.service'
 
 @Component({
   selector: 'app-question',
@@ -10,21 +10,52 @@ export class QuestionComponent implements OnInit {
 
   userAnswer: string;
   rollingScore = 0;
+  categories: any[] = [];
+  numOfCategories = 3;
+  question;
 
-  constructor(private appComponent: AppComponent) { }
+  constructor(private jeopardyService: JeopardyService) { }
 
-  @Input() question;
+  getQuestion(){
+    this.jeopardyService.getRandomQuestion()
+      .subscribe(
+        question => {this.question = question[0]; console.log(this.question);},
+        error =>  {});  
+  }
 
   checkAnswer() {
     if (this.userAnswer === this.question.answer) {
       this.rollingScore += parseInt(this.question.value);
     } 
-    this.appComponent.getQuestion();
+    this.getCategories();
+    this.question = null;
     this.userAnswer = "";
-    
+  }
+
+  getCatQuestion(id: string) {
+    this.jeopardyService.getQuestionByCategory(id)
+      .subscribe(
+        question => {this.question = question[0]; console.log(this.question);},
+        error =>  {});  
+  }
+
+  getCategories() {
+    this.categories = [];
+    for (var i = 0; i < this.numOfCategories; i++) {
+      this.jeopardyService.getRandomCategory()
+      .subscribe(
+        category => {this.categories.push(category[0]);  console.log(category[0]); console.log(this.categories);
+        },
+        error =>  {});
+    }
   }
 
   ngOnInit() {
-  }
+    this.getCategories();
+      
+    }
+    
+    
+
 
 }

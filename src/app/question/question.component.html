@@ -1,10 +1,14 @@
-<h3>
-    Here is your question worth {{question?.value}} points:
-  </h3>
+<h2>Select a category</h2>
+<div (click)="getCatQuestion(categories[0]?.id)">{{categories[0]?.title}}</div>
+<div (click)="getCatQuestion(categories[1]?.id)">{{categories[1]?.title}}</div>
+<div (click)="getCatQuestion(categories[2]?.id)">{{categories[2]?.title}}</div>
 
+<div [ngClass]="question?'visible':'hidden'" >
+<h3>Here is your question worth {{question?.value}} points:</h3>
 <div>{{question?.question}}</div>
   <br>
   <input [(ngModel)]='userAnswer'>
   <button (click)='checkAnswer()'>Submit</button>
+</div>
 
 <app-score [score]='rollingScore'></app-score>

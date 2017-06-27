@@ -9,20 +9,13 @@ import { JeopardyService } from './jeopardy.service';
 })
 export class AppComponent {
   title = 'Jeopardy Lite!';
-  question;
-  constructor(private jeopardyService: JeopardyService) {
+  
+  constructor() {
 
-  }
-
-    getQuestion(){
-    this.jeopardyService.getRandomQuestion()
-      .subscribe(
-        question => {this.question = question[0]; console.log(this.question);},
-        error =>  {});  
   }
 
   ngOnInit() {
-   this.getQuestion();
+   
   }
   
 }
