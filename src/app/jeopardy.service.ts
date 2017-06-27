@@ -10,10 +10,28 @@ export class JeopardyService {
 
   constructor(private http: Http ) { }
 
+  getRandom(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+  }
+
   private baseURL: string = 'http://jservice.io/api/';
 
-    getRandomQuestion(): Observable<any>{
+  getRandomQuestion(): Observable<any>{
     let apiURL = this.baseURL + "random";
+    return this.http.get(apiURL)
+      .map(this.extractData)
+      .catch(this.handleError)
+  }
+
+  getRandomCategory(): Observable<any>{
+    let apiURL = this.baseURL + "categories?offset=" + this.getRandom(1, 17000);
+    return this.http.get(apiURL)
+      .map(this.extractData)
+      .catch(this.handleError)
+  }
+
+  getQuestionByCategory(category: string): Observable<any>{
+    let apiURL = this.baseURL + "clues?category=" + category;
     return this.http.get(apiURL)
       .map(this.extractData)
       .catch(this.handleError)
