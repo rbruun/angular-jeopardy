@@ -44,7 +44,7 @@ export class QuestionComponent implements OnInit {
     for (var i = 0; i < this.numOfCategories; i++) {
       this.jeopardyService.getRandomCategory()
       .subscribe(
-        category => {this.categories.push(category[0]);  console.log(category[0]); console.log(this.categories);
+        category => {this.categories.push(category[0]);
         },
         error =>  {});
     }
