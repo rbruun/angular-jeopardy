@@ -1,7 +1,6 @@
 <h2>Click on a category:</h2>
-<div id="cats" (click)="getCatQuestion(categories[0]?.id)">{{categories[0]?.title | titlecase}}</div>
-<div id="cats" (click)="getCatQuestion(categories[1]?.id)">{{categories[1]?.title | titlecase}}</div>
-<div id="cats" (click)="getCatQuestion(categories[2]?.id)">{{categories[2]?.title | titlecase}}</div>
+
+<div id="cats" *ngFor="let category of categories" (click)="getCatQuestion(category.id)">{{category.title | titlecase}}</div>
 
 <div [ngClass]="question?'visible':'hidden'" >
 <h3>Here is your question worth {{question?.value}} points:</h3>
