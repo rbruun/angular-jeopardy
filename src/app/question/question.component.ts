@@ -23,6 +23,13 @@ export class QuestionComponent implements OnInit {
         error =>  {});  
   }
 
+  validateReturnedData(id: string) {
+    console.log(this.question.answer);
+    if (this.question.value = "200") {
+      this.getCatQuestion(id);
+    }
+  }
+
   checkAnswer() {
     if (this.userAnswer === this.question.answer) {
       this.rollingScore += parseInt(this.question.value);
@@ -35,7 +42,7 @@ export class QuestionComponent implements OnInit {
   getCatQuestion(id: string) {
     this.jeopardyService.getQuestionByCategory(id)
       .subscribe(
-        question => {this.question = question[0]; console.log(this.question);},
+        question => {this.question = question[0]; console.log(this.question);this.validateReturnedData(id)},
         error =>  {});  
   }
 
