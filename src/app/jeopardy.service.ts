@@ -23,8 +23,8 @@ export class JeopardyService {
       .catch(this.handleError)
   }
 
-  getRandomCategory(): Observable<any>{
-    let apiURL = this.baseURL + "categories?offset=" + this.getRandom(1, 17000);
+  getRandomCategories(count: number): Observable<any>{
+    let apiURL = this.baseURL + "categories?offset=" + this.getRandom(1, 17000) + "&count=" + count;
     return this.http.get(apiURL)
       .map(this.extractData)
       .catch(this.handleError)

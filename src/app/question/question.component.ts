@@ -23,13 +23,6 @@ export class QuestionComponent implements OnInit {
         error =>  {});  
   }
 
-  validateReturnedData(id: string) {
-    console.log(this.question.answer);
-    if (this.question.value = "200") {
-      this.getCatQuestion(id);
-    }
-  }
-
   checkAnswer() {
     if (this.userAnswer === this.question.answer) {
       this.rollingScore += parseInt(this.question.value);
@@ -42,19 +35,16 @@ export class QuestionComponent implements OnInit {
   getCatQuestion(id: string) {
     this.jeopardyService.getQuestionByCategory(id)
       .subscribe(
-        question => {this.question = question[0]; console.log(this.question);this.validateReturnedData(id)},
+        question => {this.question = question[0]; console.log(this.question);},
         error =>  {});  
   }
 
   getCategories() {
-    this.categories = [];
-    for (var i = 0; i < this.numOfCategories; i++) {
-      this.jeopardyService.getRandomCategory()
-      .subscribe(
-        category => {this.categories.push(category[0]);
-        },
-        error =>  {});
-    }
+    this.jeopardyService.getRandomCategories(this.numOfCategories)
+    .subscribe(
+      categories => {this.categories = categories;
+      },
+      error =>  {});
   }
 
   ngOnInit() {
